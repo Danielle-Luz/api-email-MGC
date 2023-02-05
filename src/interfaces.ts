@@ -3,5 +3,5 @@ export interface iEmailData {
   from: string;
   subject: string;
   text: string;
-  html: string;
+  html?: string;
 }
