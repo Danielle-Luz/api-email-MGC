@@ -1,9 +1,10 @@
+import { iEmailData } from './interfaces';
 import { emailSender } from "./emailConfig";
 
 export const sendDataToEmail = (request: Request, response: Response) => {
   const {body: emailData} = request;
 
-  const message = {
+  const message: iEmailData = {
     to: 'danisolada@gmail.com',
     from: 'daniln2209@gmail.com',
     subject: 'Assunto do Email',
