@@ -20,6 +20,16 @@ export namespace middlewares {
     const hasWrongTypes = !emailRequestKeys.every(
       (requestKey) => typeof emailRequestData[requestKey] === "string"
     );
+
+    if (hasWrongTypes) {
+      const errorMessage = {
+        message: "Todas as propriedades devem ser do tipo string",
+      };
+
+      response.status(400).send(errorMessage);
+    }
+
+    next();
   };
 
   export const checkEmailRequestKeys = (
@@ -34,5 +44,17 @@ export namespace middlewares {
     const hasWrongKeys = !emailRightKeys.every((rightKey) =>
       emailRequestKeys.includes(rightKey)
     );
+
+    if (hasWrongKeys) {
+      const errorMessage = {
+        message: `As chaves permitidas no corpo da requisição são: ${emailRequestKeys.join(
+          ", "
+        )}`,
+      };
+
+      response.status(400).send(errorMessage);
+    }
+
+    next();
   };
 }
