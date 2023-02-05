@@ -1,16 +1,22 @@
-import { iEmailData } from './interfaces';
+import { Request, Response } from "express";
 import { emailSender } from "./emailConfig";
 
 export const sendDataToEmail = (request: Request, response: Response) => {
-  const {body: emailData} = request;
+  let status = 200;
+  const infoMessage = { message: "Email enviado com sucesso" };
 
-  const message: iEmailData = {
-    to: 'danisolada@gmail.com',
-    from: 'daniln2209@gmail.com',
-    subject: 'Assunto do Email',
-    text: 'Conteúdo do Email em texto puro',
-    html: '<p>Conteúdo do Email em HTML</p>',
-  };
-  
-  emailSender.send(message);
-}
+  try {
+    const emailData = request.body;
+
+    emailSender.send(emailData);
+  } catch (error) {
+    const errorObj = error as any;
+
+    infoMessage.message = "Erro ao enviar o email";
+    status = 400;
+
+    console.log(errorObj.stack);
+  }
+
+  return response.status(status).send(infoMessage);
+};
