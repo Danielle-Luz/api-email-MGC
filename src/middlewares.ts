@@ -4,10 +4,8 @@ import { iEmailData } from "./interfaces";
 export namespace middlewares {
   const rightEmailDataModel: iEmailData = {
     to: "",
-    from: "",
-    subject: "",
+    sender: "",
     text: "",
-    html: ""
   };
 
   export const checkEmailRequestTypes = (
@@ -42,18 +40,21 @@ export namespace middlewares {
 
     const emailRequestKeys = Object.keys(emailRequestData);
     const emailRightKeys = Object.keys(rightEmailDataModel);
-    const hasWrongKeys = !emailRightKeys.every((rightKey) =>
-      emailRequestKeys.includes(rightKey)
+    const hasWrongKeys = emailRequestKeys.filter(
+      (rightKey) => !emailRightKeys.includes(rightKey)
     );
 
-    if (hasWrongKeys) {
+    if (
+      hasWrongKeys.length > 0 ||
+      emailRightKeys.length !== emailRequestKeys.length
+    ) {
       const errorMessage = {
-        message: `As chaves permitidas no corpo da requisição são: ${emailRequestKeys.join(
+        message: `As chaves necessárias no corpo da requisição são: ${emailRightKeys.join(
           ", "
         )}`,
       };
 
-      response.status(400).send(errorMessage);
+      return response.status(400).send(errorMessage);
     }
 
     next();

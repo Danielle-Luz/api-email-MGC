@@ -1,7 +1,5 @@
 export interface iEmailData {
   to: string;
-  from: string;
-  subject: string;
+  sender: string;
   text: string;
-  html?: string;
 }
