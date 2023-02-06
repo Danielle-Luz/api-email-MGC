@@ -6,6 +6,8 @@ export namespace middlewares {
     to: "",
     sender: "",
     text: "",
+    data: "",
+    telefone: ""
   };
 
   export const checkEmailRequestTypes = (

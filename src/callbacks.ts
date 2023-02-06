@@ -5,9 +5,13 @@ export const sendDataToEmail = async (request: Request, response: Response) => {
   let status = 200;
   const infoMessage = { message: "Email enviado com sucesso" };
 
-  const { to, sender, text } = request.body;
+  const { to, sender, data, telefone, text } = request.body;
   const formattedEmailText = `
   <b>Enviado por: ${sender}</b>
+  <br />
+  <b>Data: ${data}</b>
+  <br />
+  <b>Telefone: ${telefone}</b>
   <br />
   ${text
     .split("\n")
