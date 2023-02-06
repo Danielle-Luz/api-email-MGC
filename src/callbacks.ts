@@ -20,7 +20,7 @@ export const sendDataToEmail = async (request: Request, response: Response) => {
   `;
   const emailData = {
     to,
-    from: "mailtrap@minhasgrandescriancas.org",
+    from: process.env.MAILRECEIVER,
     subject: "Novo e-mail do site do projeto",
     text,
     html: formattedEmailText,
