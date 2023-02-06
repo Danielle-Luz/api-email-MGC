@@ -1,5 +1,11 @@
-export const emailSender = require('@sendgrid/mail');
+const nodemailer = require('nodemailer');
 
-const emailApiKey = "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";
-
-emailSender.setApiKey(emailApiKey);
+export const emailSender = nodemailer.createTransport({
+  domain: "minhasgrandescriancas.org",
+  host: "live.smtp.mailtrap.io",
+  port: 587,
+  auth: {
+    user: "api",
+    pass: "c02fe0005a0414c8270a2db43e9f7c1f"
+  }
+});

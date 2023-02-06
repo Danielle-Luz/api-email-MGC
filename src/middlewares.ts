@@ -7,6 +7,7 @@ export namespace middlewares {
     from: "",
     subject: "",
     text: "",
+    html: ""
   };
 
   export const checkEmailRequestTypes = (
@@ -38,9 +39,9 @@ export namespace middlewares {
     next: NextFunction
   ) => {
     const { body: emailRequestData } = request;
+
     const emailRequestKeys = Object.keys(emailRequestData);
     const emailRightKeys = Object.keys(rightEmailDataModel);
-
     const hasWrongKeys = !emailRightKeys.every((rightKey) =>
       emailRequestKeys.includes(rightKey)
     );
