@@ -2,10 +2,12 @@ import { sendDataToEmail } from "./callbacks";
 import { middlewares } from "./middlewares";
 
 const express = require("express");
+const cors = require("cors");
 
 const api = express();
 
 api.use(express.json());
+api.use(cors());
 
 api.post(
   "/email",
